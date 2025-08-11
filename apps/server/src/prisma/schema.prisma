@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   String                @id @default(uuid())
+  email                String                @unique
+  password             String
+  name                 String
+  createdAt            DateTime              @default(now())
+  auctions             Auction[]
+  wonAuctions          Auction[]             @relation("AuctionWinner")
+  bids                 Bid[]
+  multisubastas        Multisubasta[]
+  multisubastaComments MultisubastaComment[]
+  notifications        Notification[]
+  payments             Payment[]
+}
+
+model Auction {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  imageUrl    String?
+  startTime   DateTime
+  endTime     DateTime
+  startingBid Float
+  status      String
+  userId      String
+  winnerId    String?
+  createdAt   DateTime  @default(now())
+  category    String
+  user        User      @relation(fields: [userId], references: [id])
+  winner      User?     @relation("AuctionWinner", fields: [winnerId], references: [id])
+  bids        Bid[]
+  payments    Payment[]
+}
+
+model Bid {
+  id        String   @id @default(uuid())
+  amount    Float
+  userId    String
+  auctionId String
+  createdAt DateTime @default(now())
+  auction   Auction  @relation(fields: [auctionId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Payment {
+  id        String   @id @default(uuid())
+  userId    String
+  auctionId String
+  amount    Float
+  status    String
+  createdAt DateTime @default(now())
+  auction   Auction  @relation(fields: [auctionId], references: [id])
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+}
+
+model Multisubasta {
+  id          String             @id @default(uuid())
+  title       String
+  description String
+  endTime     DateTime
+  status      String
+  userId      String
+  createdAt   DateTime           @default(now())
+  user        User               @relation(fields: [userId], references: [id])
+  items       MultisubastaItem[]
+}
+
+model MultisubastaItem {
+  id             String                @id @default(uuid())
+  imageUrl       String
+  price          Float?
+  description    String?
+  creatorId      String
+  createdAt      DateTime              @default(now())
+  multisubastaId String
+  comments       MultisubastaComment[]
+  multisubasta   Multisubasta          @relation(fields: [multisubastaId], references: [id])
+}
+
+model MultisubastaComment {
+  id           String           @id @default(uuid())
+  comment      String
+  offeredPrice Float?
+  userId       String
+  itemId       String
+  createdAt    DateTime         @default(now())
+  item         MultisubastaItem @relation(fields: [itemId], references: [id])
+  user         User             @relation(fields: [userId], references: [id])
+}
