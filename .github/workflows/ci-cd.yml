@@ -24,14 +24,16 @@ jobs:
           - 6379:6379
     steps:
       - uses: actions/checkout@v3
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 10.13.1
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'pnpm'
           cache-dependency-path: '**/pnpm-lock.yaml'
-      - name: Install pnpm
-        run: corepack enable && corepack prepare pnpm@latest --activate
       - name: Install dependencies
         run: pnpm install
       - name: Lint client
