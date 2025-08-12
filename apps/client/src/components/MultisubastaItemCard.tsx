@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import useAuth from '../hooks/useAuth';
-import { MultisubastaItem, MultisubastaComment, addComment, updateItemPrice } from '../api/auctionsApi';
+import { MultisubastaItem, addComment, updateItemPrice } from '../api/auctionsApi';
 
 interface MultisubastaItemCardProps {
   item: MultisubastaItem;

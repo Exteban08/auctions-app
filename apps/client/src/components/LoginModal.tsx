@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { User } from '../types';
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSwitchToSignup: () => void;
-  onLoginSuccess: (user: any, token: string) => void;
+  onLoginSuccess: (user: User, token: string) => void;
 }
 
 const LoginModal: React.FC<LoginModalProps> = ({

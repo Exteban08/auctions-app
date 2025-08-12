@@ -307,7 +307,7 @@ export const uploadMultipleImages = async (
     const formData = new FormData();
     
     // Append each file to the form data
-    files.forEach((file, index) => {
+    files.forEach((file) => {
       formData.append('images', file);
     });
     
