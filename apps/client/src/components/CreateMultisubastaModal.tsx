@@ -299,7 +299,7 @@ const CreateMultisubastaModal: React.FC<CreateMultisubastaModalProps> = ({
                         </button>
                         <input
                           type="file"
-                          ref={el => fileInputRefs.current[index] = el}
+                          ref={el => { fileInputRefs.current[index] = el; }}
                           onChange={e => handleImageChange(e, index)}
                           accept="image/*"
                           className="hidden"

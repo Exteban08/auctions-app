@@ -158,7 +158,7 @@ const MultisubastaItemCard: React.FC<MultisubastaItemCardProps> = ({
           alt={item.description || 'Imagen de ítem'} 
           className="w-full h-64 object-cover"
         />
-        {item.price !== null && (
+        {item.price !== null && item.price !== undefined && (
           <div className="absolute top-0 right-0 bg-blue-600 text-white px-3 py-1 m-2 rounded-md">
             ${item.price.toFixed(2)}
           </div>
@@ -177,7 +177,7 @@ const MultisubastaItemCard: React.FC<MultisubastaItemCardProps> = ({
                 onClick={() => setShowPriceForm(true)}
                 className="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 text-sm font-medium"
               >
-                {item.price !== null ? 'Actualizar precio' : 'Establecer precio'}
+                {item.price !== null && item.price !== undefined ? 'Actualizar precio' : 'Establecer precio'}
               </button>
             ) : (
               <form onSubmit={handleUpdatePrice} className="mt-2 space-y-2">
@@ -233,7 +233,7 @@ const MultisubastaItemCard: React.FC<MultisubastaItemCardProps> = ({
                     </span>
                   </div>
                   <p className="text-gray-700 dark:text-gray-300 mt-1">{comment.comment}</p>
-                  {comment.offeredPrice !== null && (
+                  {comment.offeredPrice !== null && comment.offeredPrice !== undefined && (
                     <div className="mt-1 text-sm text-blue-600 dark:text-blue-400">
                       Precio ofrecido: ${comment.offeredPrice.toFixed(2)}
                     </div>
