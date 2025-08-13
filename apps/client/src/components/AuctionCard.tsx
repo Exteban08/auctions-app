@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 export type AuctionCardProps = {
   title: string;
@@ -11,9 +12,11 @@ export type AuctionCardProps = {
 const AuctionCard: React.FC<AuctionCardProps> = ({ title, image, price, category, endTime }) => {
   return (
     <div className="rounded-lg bg-white dark:bg-gray-900 shadow p-4 flex flex-col gap-2">
-      <img
+      <Image
         src={image}
         alt={title}
+        width={400}
+        height={160}
         className="w-full h-40 object-cover rounded-md mb-2 border border-gray-200 dark:border-gray-800"
       />
       <div className="flex justify-between items-center mb-1">

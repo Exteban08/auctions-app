@@ -49,7 +49,7 @@ export const getAuctions = async (req: Request, res: Response) => {
     });
 
     // Format the auctions for the frontend
-    const formattedAuctions = auctions.map(auction => {
+    const formattedAuctions = auctions.map((auction: any) => {
       const currentBid = auction.bids[0]?.amount || auction.startingBid;
       
       // Calculate time remaining
@@ -82,7 +82,7 @@ export const getAuctions = async (req: Request, res: Response) => {
         endTime: formattedTimeRemaining,
         seller: auction.user.name,
         bidCount: auction._count.bids,
-        bids: auction.bids.map(bid => ({
+        bids: auction.bids.map((bid: any) => ({
           userId: bid.user.id,
           userName: bid.user.name,
           amount: bid.amount

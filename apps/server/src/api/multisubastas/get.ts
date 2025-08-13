@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '../../lib/prisma';
 
 /**
  * Get all active multisubastas
@@ -44,13 +42,13 @@ export const getMultisubastas = async (req: Request, res: Response) => {
     });
 
     // Transform the data to include userName in comments
-    const transformedMultisubastas = multisubastas.map(multisubasta => {
+    const transformedMultisubastas = multisubastas.map((multisubasta: any) => {
       return {
         ...multisubasta,
-        items: multisubasta.items.map(item => {
+        items: multisubasta.items.map((item: any) => {
           return {
             ...item,
-            comments: item.comments.map(comment => {
+            comments: item.comments.map((comment: any) => {
               return {
                 ...comment,
                 userName: comment.user.name

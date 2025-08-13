@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { Auction } from '../api/auctionsApi';
 
 interface AuctionListProps {
@@ -35,9 +36,11 @@ const AuctionList: React.FC<AuctionListProps> = ({ auctions, title }) => {
                 onClick={() => handleAuctionClick(auction)}
               >
                 <div className="relative">
-                  <img
+                  <Image
                     src={auction.image}
                     alt={auction.title}
+                    width={400}
+                    height={208}
                     className="w-full h-52 object-cover rounded-lg mb-4"
                   />
                   <div className="absolute top-3 right-3">
@@ -100,9 +103,11 @@ const AuctionList: React.FC<AuctionListProps> = ({ auctions, title }) => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div>
                   <div className="relative mb-6">
-                    <img
+                    <Image
                       src={selectedAuction.image}
                       alt={selectedAuction.title}
+                      width={600}
+                      height={288}
                       className="w-full h-72 object-cover rounded-lg shadow-md"
                     />
                     <div className="absolute top-3 right-3">

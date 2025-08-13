@@ -1,8 +1,6 @@
 import { Response } from 'express';
 import { AuthenticatedRequest, authenticateToken } from '../../middleware/auth';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '../../lib/prisma';
 
 /**
  * Update the price of a MultisubastaItem

@@ -32,7 +32,7 @@ const useAuth = () => {
           token,
           isAuthenticated: true
         });
-      } catch (error) {
+      } catch (_) {
         // Invalid stored data, clear it
         localStorage.removeItem('authToken');
         localStorage.removeItem('user');
