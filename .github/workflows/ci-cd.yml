@@ -44,6 +44,8 @@ jobs:
         run: pnpm --filter ./apps/server lint
       - name: Build client
         run: pnpm --filter ./apps/client build
+      - name: Generate Prisma client
+        run: pnpm --filter ./apps/server prisma:generate
       - name: Build server
         run: pnpm --filter ./apps/server build
       - name: Test client
